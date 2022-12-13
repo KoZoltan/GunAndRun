@@ -21,8 +21,8 @@ import gui.PlayPanel;
 public class Game extends JPanel implements Runnable, KeyListener, MouseListener, MouseMotionListener{
 
 	private static final long serialVersionUID = 1L;
-	public static final int WIDTH = GameBoard.BOARD_WIDTH + 40;
-	public static final int HEIGHT = 630;
+	public static final int WIDTH = 1920;
+	public static final int HEIGHT = 1000;
 	public static final Font main = new Font("Bebas Neue Regular", Font.PLAIN, 28);
 	private Thread game;
 	private boolean running;
@@ -47,7 +47,7 @@ public class Game extends JPanel implements Runnable, KeyListener, MouseListener
 
 	private void update() {
 		screen.update();
-		Keys.update();
+		
 	}
 
 	private void render() {
@@ -135,12 +135,12 @@ public class Game extends JPanel implements Runnable, KeyListener, MouseListener
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		Keys.keyPressed(e);
+		
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		Keys.keyReleased(e);
+		
 	}
 
 	@Override
