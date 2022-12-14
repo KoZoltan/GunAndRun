@@ -8,8 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class invites {
+	
+	
+	public enum State{
+		ACCEPTED, DECLINED, PROCESSING
+	}
 
-	String filename = "Friendlist.txt";
+	/*String filename = "Friendlist.txt";
 	
 	public void writeFriendInvites(String filename, List<String> invites) {
 	    try {

@@ -11,18 +11,22 @@ import game.DrawUtils;
 import game.Game;
 
 public class MainMenuPanel extends GuiPanel {
-
-	Scanner sc= new Scanner(System.in); 
-	String str= sc.nextLine();                 
+ 
+	
+	public String setName(String name) {
+		return name;
+	}
 	
 	private Font titleFont = Game.main.deriveFont(100f);
 	private Font creatorFont = Game.main.deriveFont(24f);
 	private String title = "Gun&Run";
-	private String creator = game.UserData.setUsername(str);
+	private String creator = "Fiktiv01";
 	private int buttonWidth = 220;
 	
 	public MainMenuPanel() {
 		super();
+		
+		
 		GuiButton playButton = new GuiButton(Game.WIDTH / 2 - buttonWidth / 2, 220, buttonWidth, 60);
 		playButton.addActionListener(new ActionListener() {
 			@Override
@@ -33,15 +37,15 @@ public class MainMenuPanel extends GuiPanel {
 		playButton.setText("Play");
 		add(playButton);
 		
-		GuiButton scoresButton = new GuiButton(Game.WIDTH / 2 - buttonWidth / 2, 310, buttonWidth, 60);
-		scoresButton.addActionListener(new ActionListener() {
+		GuiButton friendButtun = new GuiButton(Game.WIDTH / 2 - buttonWidth / 2, 310, buttonWidth, 60);
+		friendButtun.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				GuiScreen.getInstance().setCurrentPanel("Friend_Invite");
 			}
 		});
-		scoresButton.setText("Friends");
-		add(scoresButton);
+		friendButtun.setText("Friends");
+		add(friendButtun);
 		
 		GuiButton quitButton = new GuiButton(Game.WIDTH / 2 - buttonWidth / 2, 400, buttonWidth, 60);
 		quitButton.addActionListener(new ActionListener() {

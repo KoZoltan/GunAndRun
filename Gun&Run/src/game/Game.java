@@ -16,7 +16,6 @@ import javax.swing.JPanel;
 import gui.GuiScreen;
 import gui.FriendInvitePanel;
 import gui.MainMenuPanel;
-import gui.PlayPanel;
 
 public class Game extends JPanel implements Runnable, KeyListener, MouseListener, MouseMotionListener{
 
@@ -40,9 +39,10 @@ public class Game extends JPanel implements Runnable, KeyListener, MouseListener
 		
 		screen = GuiScreen.getInstance();
 		screen.add("Menu", new MainMenuPanel());
-		screen.add("Play", new PlayPanel());
+		screen.add("Play", new MainMenuPanel());
 		screen.add("Friend_Invite", new FriendInvitePanel());
 		screen.setCurrentPanel("Menu");
+		
 	}
 
 	private void update() {

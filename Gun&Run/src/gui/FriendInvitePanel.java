@@ -13,13 +13,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+
 import game.DrawUtils;
 import game.Game;
-import game.Leaderboards;
+import game.Player;
+import game.invites;
 
 public class FriendInvitePanel extends GuiPanel{
 
-	private Leaderboards lBoard;
+	
 	private int buttonWidth = 100;
 	private int backButtonWidth = 220;
 	private int buttonSpacing = 20;
@@ -35,57 +41,66 @@ public class FriendInvitePanel extends GuiPanel{
 	
 	public FriendInvitePanel(){
 		super();
-		lBoard = Leaderboards.getInstance();
-		lBoard.loadScores();
+		
 
-		GuiButton tileButton = new GuiButton(Game.WIDTH / 2 - buttonWidth / 2, buttonY, buttonWidth, buttonHeight);
-		tileButton.addActionListener(new ActionListener() {
+		GuiButton listFriends = new GuiButton(Game.WIDTH / 2 - buttonWidth / 2, buttonY, buttonWidth, buttonHeight);
+		listFriends.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				currentState = State.DELETE;
+				currentState = State.FRIENDS;
+				Player player = new Player("Fiktiv01");
+				player.baratOlvaso();
+				player.listFriends();
 			}
 		});
-		tileButton.setText("Delete");
-		add(tileButton);
+		listFriends.setText("Friends");
+		add(listFriends);
 		
-		GuiButton scoreButton = new GuiButton(Game.WIDTH / 2 - buttonWidth / 2 - tileButton.getWidth() - buttonSpacing, buttonY, buttonWidth, buttonHeight);
-		scoreButton.addActionListener(new ActionListener() {
+		GuiButton inviteButton = new GuiButton(Game.WIDTH / 2 - buttonWidth / 2 - listFriends.getWidth() - buttonSpacing, buttonY, buttonWidth, buttonHeight);
+		inviteButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				currentState = State.INVITE;
-				 try {
+				try {
 					 
-				      FileWriter myWriter = new FileWriter("filename.txt",true);
+				      FileWriter myWriter = new FileWriter("Szerver.txt",true);
 				      BufferedWriter bw = new BufferedWriter(myWriter);
-				      bw.write( game.UserData.getUsername());
+				      bw.write("Fiktiv01");
+				      bw.write(" ");
+				      bw.write("Fiktiv02");
+				      bw.write(" ");
+				      bw.write("1");
 				      bw.newLine();
 				      bw.close();
 				 }catch(IOException e1) {
 					 System.out.println("Error");
 				 }
+				 
 			}
 		});
-		scoreButton.setText("Invite");
-		add(scoreButton);
+		inviteButton.setText("Invite");
+		add(inviteButton);
 		
-		GuiButton timeButton = new GuiButton(Game.WIDTH / 2 + buttonWidth / 2 + buttonSpacing, buttonY, buttonWidth, buttonHeight);
-		timeButton.addActionListener(new ActionListener() {
+		GuiButton listSent = new GuiButton(Game.WIDTH / 2 + buttonWidth / 2 + buttonSpacing, buttonY, buttonWidth, buttonHeight);
+		listSent.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				currentState = State.LISTS;
-				try{
-					File myObj = new File("filename.txt");
-					Scanner myReader = new Scanner(myObj);
-				    while (myReader.hasNextLine()) {
-				        String data = myReader.nextLine();
-				      }
-				}catch (FileNotFoundException e1) {
-				      System.out.println("An error occurred.");
-				      e1.printStackTrace();}
+				
+				Player player = new Player("Fiktiv01");
+				player.refresher();
+				player.printData();
+				player.getInvite();
+				
+				
+				
+				
+				
+				
 			}
 		});
-		timeButton.setText("Lists");
-		add(timeButton);
+		listSent.setText("Sent");
+		add(listSent);
 		
 		GuiButton backButton = new GuiButton(Game.WIDTH / 2 - backButtonWidth / 2, 500, backButtonWidth, 60);
 		backButton.addActionListener(new ActionListener() {
@@ -100,17 +115,11 @@ public class FriendInvitePanel extends GuiPanel{
 	
 	private void drawLeaderboards(Graphics2D g){
 		ArrayList<String> strings = new ArrayList<String>();
-		if(currentState == State.INVITE){
-			strings = convertToStrings(lBoard.getTopScores());
+		if(currentState == State.LISTS){
+			//strings = convertToStrings(null);
 		}
-		else if(currentState == State.DELETE){
-			strings = convertToStrings(lBoard.getTopTiles());
-		}
-		else {
-			for(Long l : lBoard.getTopTimes()){
-				strings.add(DrawUtils.formatTime(l));
-			}
-		}
+		
+		
 		
 		g.setColor(Color.black);
 		g.setFont(scoreFont);
@@ -144,7 +153,7 @@ public class FriendInvitePanel extends GuiPanel{
 	
 	private enum State{
 		INVITE,
-		DELETE,
+		FRIENDS,
 		LISTS
 	}
 }
