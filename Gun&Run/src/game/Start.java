@@ -6,13 +6,15 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import gui.GuiMainMenu;
+
 public class Start {
 
 	
 
 	public static void main(String[] args){
 		
-		Game game = new Game();
+		GuiMainMenu game = new GuiMainMenu();
 		
 		JFrame window = new JFrame("Gun&Run");
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

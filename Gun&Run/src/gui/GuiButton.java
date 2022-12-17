@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 
 import game.DrawUtils;
-import game.Game;
 
 public class GuiButton {
 
@@ -22,7 +21,7 @@ public class GuiButton {
 	private Color main;
 	private Color hover;
 	private Color pressed;
-	private Font font = Game.main.deriveFont(22f);
+	private Font font = GuiMainMenu.main.deriveFont(22f);
 	
 	
 	public GuiButton(int x, int y, int width, int height){
